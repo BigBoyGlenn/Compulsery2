@@ -7,12 +7,12 @@
 /// <param name="poly2"></param>
 /// <param name="polySum"></param>
 /// <param name="n"></param>
-void polyAdd(int poly1[], int poly2[], int polySum[], int n)				//Calls out the different functions
+void polyAdd(int poly1[], int poly2[], int polySum[], int n)									//Calls out the different functions
 {
-	for (int i = 0; i < n; i++)												//
+	for (int i = 0; i < n; i++)												//This runns the code below 4 times
 	{
-		std::cout << "Decide the number n * (x)^" << 3 - i << " ";
-		std::cin >> poly1[i];
+		std::cout << "Decide the number n * (x)^" << 3 - i << " ";							//Displays the text and decreases the x^ from 3 to 0
+		std::cin >> poly1[i];												//stores the new value for the array "poly1"
 	}
 	std::cout << "Second function:\n";
 	for (int i = 0; i < n; i++)
@@ -20,9 +20,9 @@ void polyAdd(int poly1[], int poly2[], int polySum[], int n)				//Calls out the 
 		std::cout << "Decide the number n * (x)^" << 3 - i << " ";
 		std::cin >> poly2[i];
 	}
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)												
 	{
-		polySum[i] = poly1[i] + poly2[i];
+		polySum[i] = poly1[i] + poly2[i];										//the sum is poly1 plus poly2
 	}
 }
 /// <summary>
@@ -34,20 +34,20 @@ void polyAdd(int poly1[], int poly2[], int polySum[], int n)				//Calls out the 
 /// <param name="n"></param>
 void polySub(int poly1[], int poly2[], int polySum[], int n)
 {
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < n; i++)												//This runns the code below 4 times
 	{
-		std::cout << "Decide the number n * (x)^" << 3 - i << " ";
-		std::cin >> poly1[i];
+		std::cout << "Decide the number n * (x)^" << 3 - i << " ";							//Displays the text and decreases the x^ from 3 to 0
+		std::cin >> poly1[i];												//stores the new value for the array "poly1"
 	}
 	std::cout << "Second function:\n";
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < n; i++)
 	{
 		std::cout << "Decide the number n * (x)^" << 3 - i << " ";
 		std::cin >> poly2[i];
 	}
 	for (int i = 0; i < n; i++)
 	{
-		polySum[i] = poly1[i] - poly2[i];
+		polySum[i] = poly1[i] - poly2[i];										//Same as polyAdd, just changed "+" to "-"
 	}
 }
 /// <summary>
@@ -60,18 +60,18 @@ void polySub(int poly1[], int poly2[], int polySum[], int n)
 /// <param name="n"></param>
 void polyMultiply(int poly1[], int poly2[], int polySum[], int polyArray[], int n)
 {
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < n; i++)
 	{
 		std::cout << "Decide the number n * (x)^" << 3 - i << " ";
 		std::cin >> poly1[i];
 	}
 	std::cout << "Second function:\n";
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < n; i++)
 	{
 		std::cout << "Decide the number n * (x)^" << 3 - i << " ";
 		std::cin >> poly2[i];
 	}
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)													//
 	{
 		for (int j = 0; j < n; j++)
 		{
@@ -84,18 +84,27 @@ void polyMultiply(int poly1[], int poly2[], int polySum[], int polyArray[], int 
 /// </summary>
 /// <param name="poly"></param>
 /// <param name="n"></param>
-void polyDerive(int poly[], int n)
+void polyDerive(int poly1[], int polySum[], int n)
 {
+	for (int i = 0; i < n; i++)												//This runns the code below 4 times
+	{
+		std::cout << "Decide the number n * (x)^" << 3 - i << " ";							//Displays the text and decreases the x^ from 3 to 0
+		std::cin >> poly1[i];												//stores the new value for the array "poly1"
+	}
 	for (int i = 0; i < n; i++)
 	{
-		if (0 < i * poly[i])
 		{
-			std::cout << i * poly[i];
-			if (1 < i - 1)
-				std::cout << "x^" << 3 - i;
-			if (i == 2)
+			poly1[i] = poly1[i] * (3-i);
+		}
+		if (poly1[i] != 0)
+		{
+			std::cout << poly1[i];
+			if (i < 1)
+				std::cout << "x^2";
+			if (i == 1)
 				std::cout << "x";
-			if ((i != n - 1) && (poly[i + 1] != 0))
+
+			if (i < 2)
 				std::cout << " + ";
 		}
 	}
@@ -107,18 +116,20 @@ void polyDerive(int poly[], int n)
 /// <param name="n"></param>
 void polyPrint(int poly[], int n)
 {
-	for (int i = n-1; i >=0; i--)
+
+	for (int i = 0; i < n; i++)
 	{
 		if (poly[i] != 0)
 		{
 			std::cout << poly[i];
-			if (i > 1)
-				std::cout << "x^" << i;
-			if (i == 1)
+			if (i < 2)
+				std::cout << "x^" << n - (i+1);
+			if (i == 2)
 				std::cout << "x";
-			if ((i != n + 1) && (poly[i + 1] != 0) && i != 0)
+
+			if(i != 3)
 				std::cout << " + ";
-		}
+		}	
 		
 	}
 }
@@ -128,16 +139,17 @@ void polyPrint(int poly[], int n)
 /// <param name="poly"></param>
 void polyPrintM(int poly[])
 {
-	for (int i = 7 - 1; i >= 0; i--)
+	for (int i = 0; i < 7; i++)
 	{
 		if (poly[i] != 0)
 		{
 			std::cout << poly[i];
-			if (i > 1)
-				std::cout << "x^" << i;
-			if (i == 1)
+			if (i < 5)
+				std::cout << "x^" << 7 - (i + 1);
+			if (i == 5)
 				std::cout << "x";
-			if ((i != 7 + 1) && (poly[i + 1] != 0) && i != 0)
+
+			if (i != 6)
 				std::cout << " + ";
 		}
 
@@ -151,14 +163,10 @@ void polymenu()
 	int menu = 0;
 	int auxValue = 0;
 	int n = 4;
-	std::string letters[4] = { "a", "b", "c", "d" };
-	int selectedMenu = 0; //defines a value to switch between menus
-	int selectedPoly = 0;
-	int polyArray[7]{ 0, 0, 0, 0, 0, 0, 0 };
-	int poly1[4] = { 0, 0, 0, 0 };
+	int polyArray[7]{ 0, 0, 0, 0, 0, 0, 0 };											//Empty array to fill in the sum of two arrays multiplyed
+	int poly1[4] = { 0, 0, 0, 0 };													//Empty array 
 	int poly2[4] = { 0, 0, 0, 0 };
-	int polySum[4] = {}; //empty array to fill in the sum of two arrays
-	int polyResult[4] = {}; // empty array to fill in two arrays multiplied with each other
+	int polySum[4] = {};														//empty array to fill in the sum of two arrays
 
 	std::cout << "Polynom\n";
 	std::cout << "1. Addition\n";
@@ -173,7 +181,7 @@ void polymenu()
 	{
 
 	case 1:
-		polyAdd(poly1, poly2, polySum, n);
+		polyAdd(poly1, poly2, polySum, n);										//
 		polyPrint(polySum, n);
 		std::cout << "\n\n";
 		break;
@@ -182,6 +190,7 @@ void polymenu()
 		polySub(poly1, poly2, polySum, n);
 		polyPrint(polySum, n);
 		std::cout << "\n\n";
+		break;
 
 	case 3:
 		polyMultiply(poly1, poly2, polySum, polyArray, n);
@@ -189,7 +198,8 @@ void polymenu()
 		std::cout << "\n\n";
 
 	case 4:
-
+		polyDerive(poly1, polySum, n);
+		std::cout << "\n\n";
 
 	case 5:
 		return;
@@ -209,7 +219,7 @@ int main()
 	int menu = 0;
 	char op;
 	float num1, num2;
-	int n=0;
+	int n= 0;
 	long factorial = 1.0;
 
 
@@ -219,8 +229,8 @@ int main()
 	{
 		std::cout << "Welcome to the shitiest calculator you'll ever use!\n\n";
 		std::cout << "Please choose one of the below\n";
-		std::cout << "1. Simple meth\n";
-		std::cout << "2. Polynomunsnsns\n";
+		std::cout << "1. Simple math\n";
+		std::cout << "2. Polynomials\n";
 		std::cout << "3. Factorial\n";
 		std::cout << "4. Quit\n";
 		std::cin >> menu;
@@ -229,7 +239,7 @@ int main()
 		switch (menu)
 		{
 			case 1:
-				std::cout << "Enter operator: +, -, *, /:";
+				std::cout << "Enter operator: +, -, *, /:";								
 				std::cin >> op;
 
 				if (op == '+' || op == '-' || op == '*' || op == '/')
@@ -255,14 +265,15 @@ int main()
 					case'/':
 						std::cout << num1 << " / " << num2 << " = " << num1 / num2;
 						break;
+				
 
-					default:
-						std::cout << "Error";
-						break;
 					}
 					return 0;
 				}
-				return 0;
+			default:
+				std::cout << "Error\n";
+				break;
+
 			case 2:
 				polymenu();
 				break;
